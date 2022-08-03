@@ -1,0 +1,39 @@
+{
+  "name": "proffy",
+  "private": true,
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "mobile": "cd ./packages/mobile && expo start && a",
+    "server": "cd ./packages/server && yarn start:dev",
+    "web": "cd ./packages/web && yarn dev"
+  },
+  "jest": {
+    "clearMocks": true,
+    "verbose": true,
+    "preset": "ts-jest",
+    "projects": [
+      "<rootDir>/packages/**/jest.config.js"
+    ],
+    "testEnvironment": "node",
+    "testMatch": [
+      "*.spec.ts",
+      "*.spec.tsx"
+    ]
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "author": "SrOliver202023 <sroliver202023@gmail.com>",
+  "devDependencies": {
+    "@proffy/eslint-config": "*",
+    "@types/jest": "^26.0.5",
+    "jest": "^26.1.0",
+    "ts-jest": "^26.1.3",
+    "typescript": "^3.9.7"
+  }
+}
