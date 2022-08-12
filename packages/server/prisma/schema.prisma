@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"	
+	url = env("DATABASE_URL")
+}	
+model User {
+  id String @id @default(uuid()) 
+	name String
+	lastName String
+	email String @unique
+	password String
+
+	photo String? 
+	whatsapp String?
+	biography String?
+	hierarchy String? @default("STUDENT")
+	isAdmin  Boolean @default(false)
+
+  class Class[] 
+
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+}
+
+model Class {
+  id String @id @default(uuid()) 
+	matter String
+	description String
+	price Float
+
+	userId String
+  user User @relation(fields: [userId], references: [id])
+
+  scheduleId String?
+  schedule Schedule[] 
+
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+}
+
+model Schedule {
+  id String @id @default(uuid()) 
+	day Int
+	startTime String
+	endTime String
+
+	classId String?
+  class Class? @relation(fields: [classId], references: [id])
+
+	createdAt DateTime @default(now())
+	updatedAt DateTime @updatedAt
+}
+
